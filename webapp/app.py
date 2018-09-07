@@ -4,6 +4,7 @@ import pickle
 import sqlite3
 import os
 import numpy as np
+from functions import classify
 
 # import update function from local dir
 #from update import update_model
@@ -17,24 +18,16 @@ import numpy as np
 #				'pkl_objects/classifier.pkl'), 'rb'), encoding="latin1")
 #db = os.path.join(cur_dir, 'reviews.sqlite')
 
-def classify(document):
+def classify2(document):
 	label = {0: 'negative', 1: 'positive'}
 	X = vect.transform([document])
 	y = clf.predict(X)[0]
 	proba = np.max(clf.predict_proba(X))
 	return label[y], proba
 
-def train(document, y):
-	X = vect.transform([document])
-	clf.partial_fit(X, [y])
-
-def sqlite_entry(path, document, y):
-	conn = sqlite3.connect(path)
-	c = conn.cursor()
-	c.execute("INSERT INTO review_db (review, sentiment, date)"\
-			" VALUES (?, ?, DATETIME('now'))", (document, y))
-	conn.commit()
-	conn.close()
+def prep(input_text):
+	prepped = "a"
+	return prepped
 
 app = Flask(__name__)
 
@@ -51,12 +44,28 @@ def index():
 def results():
 	form = ReviewForm(request.form)
 	if request.method == 'POST' and form.validate():
-		review = request.form['moviereview']
-		y, proba = "blabla", 0.666 #classify(review)
+		raw_text = request.form['moviereview']
+		#prepped_text = prep(raw_text)
+		preds = classify(raw_text)
 		return render_template('results.html',
-	content=review,
-	prediction="blabla",
-	probability=round(proba*100, 2))
+	content=raw_text,
+	predictionie="IE",
+	probabilityie=round(preds["IE"]*100, 2),
+	predictionhf="HF",
+	probabilityhf=round(preds["HF"]*100, 2),
+	predictioniv="IV",
+	probabilityiv=round(preds["IV"]*100, 2),
+	predictionad="AD",
+	probabilityad=round(preds["AD"]*100, 2),
+	predictionsu="SU",
+	probabilitysu=round(preds["SU"]*100, 2),
+	predictionmh="MH",
+	probabilitymh=round(preds["MH"]*100, 2),
+	predictionnv="NV",
+	probabilitynv=round(preds["NV"]*100, 2),
+	predictionok="OK",
+	probabilityok=round(preds["OK"]*100, 2)
+	)
 	return render_template('reviewform.html', form=form)
 
 @app.route('/thanks', methods=['POST'])
