@@ -1,0 +1,5 @@
+wtforms
+flask
+sklearn
+pysqlite3
+
