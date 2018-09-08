@@ -5,12 +5,17 @@
 
 <head>
  <title>NTNU Course description classification</title>
+ <link rel="stylesheet" href="{{ url_for('static',
+		filename='style.css') }}">
 </head>
 
 <body>
-	<h2>Please enter a course description:</h2>
-        <h3>You will get a prediction of which faculty the course belongs to:<br>
-        </h3> 
+	<h2>Please enter a course description</h2>
+        <h3>You will get a prediction of which faculty the course belongs to<br>
+		</h3> 
+		The classifier is trained on publicly available data from NTNU's pages. A naive bayes + logistic regression model is used. 
+		<br> A Jupyter notebook with code for training of the model can be found <a href="https://github.com/thomasht86/itdagene_norconsult">here</a>
+		<br>
 	{% from "_formhelpers.html" import render_field %}
 	<form method=post action="/results">
 		<dl>
