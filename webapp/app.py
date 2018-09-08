@@ -84,4 +84,4 @@ def feedback():
 
 if __name__ == '__main__':
 	#update_model(db_path=db, model=clf, batch_size=10000)
-	app.run(debug=False, host='0.0.0.0', port=5000)
+	app.run(debug=False, host='0.0.0.0', port=8000)
