@@ -1,6 +1,12 @@
 body {
-  width:600px;
+  font-family: 'Museo 300', Calibri, Helvetica, Arial;
 }
+
+.content {
+  width: 40em; 
+  margin: auto;
+}
+
 #button {
   padding-top: 20px;
 }
