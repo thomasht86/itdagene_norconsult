@@ -16,13 +16,14 @@
 		<h3>You will get a prediction of which faculty the course belongs to
 			<br>
 		</h3>
-		The classifier is trained on publicly available data from NTNU's pages. A naive bayes + logistic regression model is used.
+		The classifier is trained on over 5000 publicly available course descriptions from NTNU's pages. A naive bayes + logistic regression model is used on features that are made
+		of Tf-Idf weights for 1-gram and 2-gram words.
 		<br> A Jupyter notebook with code for training of the model can be found
 		<a href="https://github.com/thomasht86/itdagene_norconsult">here</a>
 		<br> {% from "_formhelpers.html" import render_field %}
 		<form method=post action="/results">
 			<dl>
-				{{ render_field(form.moviereview, cols='30', rows='10') }}
+				{{ render_field(form.moviereview, cols='40', rows='10') }}
 			</dl>
 			<div>
 				<input type=submit value='Get prediction' name='submit_btn'>
